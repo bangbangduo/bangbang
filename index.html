@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bang-Bang | Duo Pop-Rock Pop-Up Retro</title>
+    <style>
+        /* --- PALETTE DE COULEURS ET POLICES REPRODUISANT L'AFFICHE --- */
+        :root {
+            --bg-cream: #e6dfcc;      /* Fond crème retro texturé */
+            --dark-teal: #1f4e4e;     /* Bleu-vert canard foncé */
+            --terracotta: #b84a39;    /* Rouge brique / Terre cuite */
+            --charcoal: #1a1a1a;      /* Silhouettes et texte sombre */
+            --white-clean: #ffffff;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Special+Elite&family=Teko:wght@600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--charcoal);
+            line-height: 1.5;
+            padding: 0;
+            margin: 0;
+            /* Effet texture papier retro subtil */
+            background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 0);
+            background-size: 4px 4px;
+        }
+
+        /* --- BARRE DE NAVIGATION RETRO --- */
+        .navbar {
+            background-color: var(--dark-teal);
+            border-bottom: 5px solid var(--terracotta);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .nav-logo {
+            font-family: 'Teko', sans-serif;
+            font-size: 2rem;
+            color: var(--bg-cream);
+            text-transform: uppercase;
+            text-decoration: none;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo span {
+            color: var(--terracotta);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--bg-cream);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            padding: 5px 10px;
+        }
+
+        .nav-links a:hover {
+            color: var(--terracotta);
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 4px;
+        }
+
+        /* --- SECTION HERO (AFFICHE RETRO) --- */
+        .hero {
+            background-color: var(--dark-teal);
+            color: var(--bg-cream);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 8px solid var(--terracotta);
+        }
+
+        /* Nuages et Étoiles en fond (Style Illustration) */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.15;
+            background: radial-gradient(circle at 20% 30%, var(--terracotta) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, var(--terracotta) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 7rem;
+            line-height: 0.9;
+            color: var(--terracotta);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0px var(--charcoal);
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--bg-cream);
+            margin-bottom: 40px;
+            display: inline-block;
+            border-bottom: 3px solid var(--terracotta);
+            padding-bottom: 5px;
+        }
+
+        /* Graphisme central : Silhouettes retro inspirées de l'image */
+        .hero-graphic {
+            margin: 30px auto;
+            max-width: 600px;
+            height: 300px;
+            position: relative;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50% 50% 0 0;
+            border: 4px dashed var(--terracotta);
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .ufo-shape {
+            position: absolute;
+            top: 30px;
+            left: 20%;
+            width: 100px;
+            height: 25px;
+            background: var(--bg-cream);
+            border-radius: 50%;
+            opacity: 0.8;
+            box-shadow: 0 0 15px rgba(230,223,204,0.6);
+        }
+        .ufo-shape::after {
+            content: "";
+            position: absolute;
+            top: -8px; left: 30px;
+            width: 40px; height: 15px;
+            background: var(--terracotta);
+            border-radius: 50%;
+        }
+
+        .ufo-shape.right {
+            left: auto;
+            right: 15%;
+            top: 70px;
+            width: 70px;
+            height: 18px;
+        }
+
+        .silhouette-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 40px;
+            z-index: 2;
+        }
+
+        /* SVG Simples pour représenter guitare & chanteuse pulp */
+        .icon-silhouette {
+            fill: var(--charcoal);
+        }
+
+        .hero-tagline {
+            font-family: 'Special Elite', monospace;
+            font-size: 1.5rem;
+            color: var(--bg-cream);
+            margin-top: 30px;
+            letter-spacing: 1px;
+        }
+
+        /* --- SECTION EN-TÊTE ACCROCHE POP/ROCK --- */
+        .banner-strip {
+            background-color: var(--terracotta);
+            color: var(--bg-cream);
+            text-align: center;
+            padding: 15px 10px;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: bold;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+        }
+
+        /* --- BLOCS PRINCIPAUX (STYLE TICKETS / CARTES RETRO) --- */
+        .main-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .grid-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        /* Style Ticket de Concert Rétro */
+        .ticket-card {
+            background-color: var(--white-clean);
+            border: 3px solid var(--terracotta);
+            border-radius: 12px;
+            padding: 25px;
+            position: relative;
+            box-shadow: 6px 6px 0px var(--dark-teal);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease;
+        }
+
+        .ticket-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Découpes de ticket sur les côtés */
+        .ticket-card::before, .ticket-card::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: var(--bg-cream);
+            border: 3px solid var(--terracotta);
+            border-radius: 50%;
+        }
+        .ticket-card::before { left: -12px; transform: translateY(-50%); border-left-color: transparent; }
+        .ticket-card::after { right: -12px; transform: translateY(-50%); border-right-color: transparent; }
+
+        .card-title {
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            color: var(--dark-teal);
+            text-align: center;
+            border-bottom: 2px dashed var(--terracotta);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .card-content {
+            font-size: 1.05rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Liste des concerts */
+        .concert-list {
+            list-style: none;
+        }
+
+        .concert-item {
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        .concert-date {
+            font-weight: bold;
+            color: var(--terracotta);
+            font-size: 0.95rem;
+        }
+
+        .concert-venue {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .concert-city {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Boutons Rétro */
+        .btn-retro {
+            display: block;
+            background-color: var(--dark-teal);
+            color: var(--bg-cream);
+            text-align: center;
+            padding: 10px 15px;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            border: 2px solid var(--charcoal);
+            box-shadow: 3px 3px 0px var(--charcoal);
+            transition: all 0.2s ease;
+        }
+
+        .btn-retro:hover {
+            background-color: var(--terracotta);
+            color: white;
+            box-shadow: 1px 1px 0px var(--charcoal);
+            transform: translate(2px, 2px);
+        }
+
+        /* --- SECTION BIOGRAPHIE --- */
+        .bio-section {
+            background-color: var(--white-clean);
+            border: 4px solid var(--dark-teal);
+            padding: 40px;
+            margin-top: 50px;
+            border-radius: 8px;
+            box-shadow: 8px 8px 0px var(--terracotta);
+        }
+
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media(min-width: 768px) {
+            .bio-grid { grid-template-columns: 1fr 2fr; }
+        }
+
+        .bio-visual {
+            background-color: var(--dark-teal);
+            color: var(--bg-cream);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            border-radius: 6px;
+            text-align: center;
+            border: 3px solid var(--terracotta);
+        }
+
+        .bio-visual h3 {
+            font-family: 'Teko', sans-serif;
+            font-size: 3rem;
+            color: var(--terracotta);
+            line-height: 1;
+        }
+
+        .bio-text h2 {
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            color: var(--dark-teal);
+            margin-bottom: 15px;
+        }
+
+        .bio-text p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* --- FOOTER / PARTENAIRES --- */
+        footer {
+            background-color: var(--charcoal);
+            color: var(--bg-cream);
+            padding: 40px 20px;
+            margin-top: 80px;
+            border-top: 6px solid var(--terracotta);
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            align-items: center;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .beer-logo-placeholder {
+            border: 2px solid var(--terracotta);
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--terracotta);
+            font-size: 1.2rem;
+        }
+
+        .footer-contact h4 {
+            text-transform: uppercase;
+            color: var(--terracotta);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-contact p {
+            font-family: 'Special Elite', monospace;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 15px;
+            font-size: 1.5rem;
+        }
+
+        .footer-socials a {
+            color: var(--bg-cream);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-socials a:hover {
+            color: var(--terracotta);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.85rem;
+            color: #666;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRE DE NAVIGATION -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="nav-logo">BANG<span>-</span>BANG</a>
+            <ul class="nav-links">
+                <li><a href="#musique">Musique</a></li>
+                <li><a href="#concerts">Concerts</a></li>
+                <li><a href="#bio">Bio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- SECTION HERO (AFFICHE) -->
+    <header class="hero">
+        <div class="ufo-shape"></div>
+        <div class="ufo-shape right"></div>
+        
+        <h1 class="hero-title">BANG-BANG</h1>
+        <div class="hero-subtitle">Duo Guitare Chant Pop-Rock</div>
+        
+        <div class="hero-graphic">
+            <div class="silhouette-container">
+                <!-- SVG Silhouette Musicien -->
+                <svg width="100" height="180" viewBox="0 0 100 180" class="icon-silhouette">
+                    <circle cx="50" cy="35" r="15"/>
+                    <path d="M35,55 L65,55 L60,130 L40,130 Z"/>
+                    <!-- Guitare stylisée -->
+                    <path d="M20,90 Q15,70 45,75 L85,45 L90,52 L52,82 Q55,100 20,90 Z" fill="#b84a39" stroke="#1a1a1a" stroke-width="2"/>
+                </svg>
+                <!-- SVG Silhouette Chanteuse Pulp avec Arme -->
+                <svg width="100" height="210" viewBox="0 0 100 210" class="icon-silhouette">
+                    <circle cx="45" cy="30" r="14"/>
+                    <!-- Chevelure Retro -->
+                    <path d="M30,20 Q50,5 62,25 Q55,42 40,35 Z" fill="#1a1a1a"/>
+                    <path d="M32,48 L58,48 L65,140 L30,140 Z"/>
+                    <!-- Main + Revolver levé -->
+                    <path d="M32,70 L20,55 L22,50 L30,62 Z"/>
+                    <path d="M18,53 L18,43 L24,47 Z" fill="#e6dfcc"/>
+                </svg>
+            </div>
+        </div>
+
+        <p class="hero-tagline">FLAVORED WITH TREMOLO & RAW ENERGY</p>
+    </header>
+
+    <!-- BANDEAU ACCROCHE -->
+    <div class="banner-strip">
+        REPRISES POP ROCK • ARRANGEMENT ORIGINAL
+    </div>
+
+    <!-- CONTENU PRINCIPAL (GRILLE DE TICKETS) -->
+    <main class="main-container">
+        <div class="grid-sections">
+            
+            <!-- CODE RETRO / TITRES -->
+            <section class="ticket-card" id="musique">
+                <div>
+                    <h3 class="card-title">Derniers Titres</h3>
+                    <p class="card-content" style="text-align: center; font-family: 'Special Elite', monospace; padding: 15px 0;">
+                        [ CASSETTE AUDIO DEMO ]<br><br>
+                        • A-SIDE: Retro Pop Hits<br>
+                        • B-SIDE: Rock Classiques
+                    </p>
+                    <p class="card-content">Découvrez nos maquettes et démos enregistrées en studio avec nos arrangements originaux à la guitare et au trémolo.</p>
+                </div>
+                <a href="#" class="btn-retro">Écouter les démos</a>
+            </section>
+
+            <!-- AGENDA DES CONCERTS -->
+            <section class="ticket-card" id="concerts">
+                <div>
+                    <h3 class="card-title">Agenda Concerts</h3>
+                    <ul class="concert-list">
+                        <li class="concert-item">
+                            <span class="concert-date">5 SEPTEMBRE - 19H30</span>
+                            <div class="concert-venue">TARBREW Craft Beer</div>
+                            <div class="concert-city">Montpellier (34)</div>
+                        </li>
+                        <li class="concert-item">
+                            <span class="concert-date">12 SEPTEMBRE - 20H30</span>
+                            <div class="concert-venue">Le Pistil Rock Bar</div>
+                            <div class="concert-city">Montpellier (34)</div>
+                        </li>
+                        <li class="concert-item">
+                            <span class="concert-date">03 OCTOBRE - 21H00</span>
+                            <div class="concert-venue">Le Black Out</div>
+                            <div class="concert-city">Montpellier (34)</div>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-retro" style="margin-top: 15px;">Infos & Billets</a>
+            </section>
+
+            <!-- L'ARRANGEMENT UNIQUE -->
+            <section class="ticket-card">
+                <div>
+                    <h3 class="card-title">Le Son Unique</h3>
+                    <p class="card-content"><strong>Bang-Bang</strong> ce n'est pas juste des reprises. C'est la fusion d'une guitare électrique brute habitée par le trémolo retro et d'une voix puissante et habitée.</p>
+                    <p class="card-content">De Bowie à Dua Lipa, chaque morceau est désossé puis reconstruit pour un voyage sonore vintage et moderne.</p>
+                </div>
+                <a href="#bio" class="btn-retro">En savoir plus</a>
+            </section>
+
+            <!-- BOUTIQUE / MERCH -->
+            <section class="ticket-card">
+                <div>
+                    <h3 class="card-title">Boutique Retro</h3>
+                    <p class="card-content">Soutenez le duo en vous procurant nos goodies officiels directement lors de nos concerts ou en ligne :</p>
+                    <p class="card-content" style="font-family: 'Special Elite', monospace; font-size: 0.95rem;">
+                        - T-shirts Sérigraphiés Vintage<br>
+                        - Stickers OVNIs & Silhouettes<br>
+                        - Badges Collector
+                    </p>
+                </div>
+                <a href="#" class="btn-retro">Voir le Merch</a>
+            </section>
+
+        </div>
+
+        <!-- SECTION BIOGRAPHIE DETAIL -->
+        <section class="bio-section" id="bio">
+            <div class="bio-grid">
+                <div class="bio-visual">
+                    <h3>B-B</h3>
+                    <p style="font-family: 'Special Elite', monospace; font-size: 0.9rem; margin-top: 10px;">EST. 2025</p>
+                </div>
+                <div class="bio-text">
+                    <h2>L'Histoire de Bang-Bang</h2>
+                    <p>Né de la rencontre entre deux passionnés de culture vintage, de cinéma de science-fiction des années 60 et de gros sons pop-rock, <strong>Bang-Bang</strong> revisite le concept du duo acoustique traditionnel en y injectant une dose massive d'énergie électrique et d'effets analogiques.</p>
+                    <p>Armés d'une guitare au trémolo obsédant et d'une section rythmique minimaliste au pied, ils recréent à deux l'impact d'un groupe complet tout en conservant la complicité et la flexibilité d'un duo. Le répertoire traverse les époques : des classiques de la pop moderne aux hymnes rock intemporels, transfigurés par leur patte inimitable.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER / PARTENAIRES -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="beer-logo-placeholder">
+                    TB
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #888;">Partenaire Officiel</p>
+                    <strong style="color: white; font-size: 1.2rem; letter-spacing: 1px;">TARBREW</strong>
+                    <p style="font-size: 0.8rem; color: var(--terracotta);">Flavored Craft Beer - Montpellier</p>
+                </div>
+            </div>
+            
+            <div class="footer-contact">
+                <h4>Contact / Booking</h4>
+                <p>📍 Montpellier, France</p>
+                <p>📧 info@bangbang-duo.com</p>
+                <p>📞 06 00 00 00 00</p>
+            </div>
+
+            <div class="footer-socials">
+                <a href="#" title="Facebook">▶ Facebook</a>
+                <a href="#" title="Instagram">▶ Instagram</a>
+                <a href="#" title="Bandcamp">▶ Bandcamp</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 BANG-BANG DUO. Tous droits réservés. Design Inspiré de l'affiche originale.
+        </div>
+    </footer>
+
+</body>
+</html>
